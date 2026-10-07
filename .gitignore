@@ -1,2 +1,7 @@
 # служебное
 _pdfimg/
+_clean_*.png
+_shot*.png
+_full.png
+_review/
+*.log
