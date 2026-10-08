@@ -703,6 +703,22 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
     .burger{display:flex}
   .brand--top img{height:36px}
 }
+
+#global-hd .util{background:var(--green-deep);color:#A8BCB0;font:400 12.5px/1 var(--sans)}
+#global-hd .util__in{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:9px 0}
+#global-hd .util b{color:#fff;font-weight:600}
+#global-hd .util a{color:#A8BCB0;text-decoration:none}
+#global-hd .util a:hover{color:#fff}
+#global-hd .util__r{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#global-hd .util__sep{width:1px;height:12px;background:rgba(255,255,255,.18)}
+#global-hd .util__tgl{background:transparent;border:0;color:#A8BCB0;cursor:pointer;padding:4px 6px;font:400 12px/1 var(--sans);border-radius:2px}
+#global-hd .util__tgl:hover{color:#fff}
+#global-hd .util__hide{}
+#global-hd .navrow{padding:0;display:flex;align-items:stretch;gap:14px}
+#global-hd .nav{display:flex;flex:1;gap:2px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line-2);margin:0}
+#global-hd .nav a{flex:1}
+#global-hd .burger{align-self:center;margin-left:auto}
+#global-hd .mnav{border-bottom:1px solid var(--line)}
 </style>
 
 
@@ -789,11 +805,11 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
     <div class="top__search"><div class="search"><span class="ic--20" data-ic="search" style="color:var(--faint);margin-left:2px"></span><input type="search" placeholder="Поиск…" aria-label="Поиск"><button class="btn btn--blue btn--sm" type="button">Найти</button></div></div>
 
   </div>
-</div>
+  <div id="global-hd"></div>
+</header>
 
 <!-- ============ ЭКРАН 1. ГЛАВНАЯ ============ -->
 <section class="screen is-on" id="scr-home">
-  <div class="hd" data-header="Главная"></div>
   <div class="wrap sec sec--first">
     <div class="leadstory">
       <article>
@@ -972,7 +988,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 </section>
 <!-- ============ ЭКРАН 2. ПОЛЕЗНОЕ / СТАТЬЯ ============ -->
 <section class="screen" id="scr-article">
-  <div class="hd" data-header="Статья"></div>
   <div class="wrap sec sec--first">
     <div class="split">
       <article class="art">
@@ -1085,7 +1100,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
 <!-- ============ ЭКРАН 3. WELLNESS КАЛЕНДАРЬ ============ -->
 <section class="screen" id="scr-calendar">
-  <div class="hd" data-header="Календарь"></div>
   <div class="wrap sec sec--first">
     <div class="sec__head">
       <div>
@@ -1140,7 +1154,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
 <!-- ============ ЭКРАН: НОВОСТИ ============ -->
 <section class="screen" id="scr-news">
-  <div class="hd" data-header="Новости"></div>
   <div class="wrap sec sec--first">
     <div class="sec__head">
       <div>
@@ -1220,7 +1233,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
 <!-- ============ ЭКРАН: ОБЗОР МЕРОПРИЯТИЙ ============ -->
 <section class="screen" id="scr-reviews">
-  <div class="hd" data-header="Обзор"></div>
   <div class="wrap sec sec--first">
     <div class="sec__head">
       <div>
@@ -1323,7 +1335,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 </section>
 <!-- ============ ЭКРАН: КУРСЫ И ОБУЧЕНИЕ ============ -->
 <section class="screen" id="scr-courses">
-  <div class="hd" data-header="Курсы"></div>
   <div class="wrap sec sec--first">
     <div class="sec__head">
       <div>
@@ -1357,7 +1368,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
 <!-- ============ ЭКРАН КАТАЛОГ (скоро) ============ -->
 <section class="screen" id="scr-catalog">
-  <div class="hd" data-header="Каталог"></div>
   <div class="wrap sec sec--first" style="min-height:60vh;display:flex;align-items:center">
     <div style="max-width:680px;margin:0 auto;text-align:center">
       <div style="width:80px;height:80px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px"><span class="ic--30" data-ic="pin"></span></div>
@@ -1373,7 +1383,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 </section>
 
 <section class="screen" id="scr-community">
-  <div class="hd" data-header="Сообщество"></div>
   <div class="wrap sec sec--first" style="min-height:60vh;display:flex;align-items:center">
     <div style="max-width:680px;margin:0 auto;text-align:center">
       <div style="width:80px;height:80px;border-radius:50%;background:var(--clay-soft);color:var(--clay);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px"><span class="ic--30" data-ic="comment"></span></div>
@@ -1775,14 +1784,15 @@ var EVENTS=[
   /* ---------------- ШАПКА И ФУТЕР ПОРТАЛА ---------------- */
   var NAV=[['Главная','home'],['Новости','news'],['Wellness календарь','calendar'],['Обзор мероприятий','reviews'],['Полезное','article'],['Курсы','courses']];
 
-  function headerHTML(active){
+  var activeScreen='home';
+  function renderGlobalHeader(){
     var nav=NAV.map(function(n){
-      var on=(active===n[1])||(active==='article'&&n[1]==='article');
+      var on=(activeScreen===n[1]);
       var cls=(on?'is-on':'')+(n[2]?' disabled':'');
       return '<a href="#scr-'+n[1]+'" data-scr="'+n[1]+'" class="'+cls+'">'+n[0]+(n[2]?'<span class="soon">скоро</span>':'')+'</a>';
     }).join('');
     var mnav=NAV.map(function(n){return '<a href="#scr-'+n[1]+'" data-scr="'+n[1]+'" class="'+(n[2]?'disabled':'')+'">'+n[0]+(n[2]?' <small style="color:var(--gold);text-transform:uppercase;font-size:10px;letter-spacing:.06em">скоро</small>':'')+'<span class="ic--16" data-ic="chevron-right"></span></a>';}).join('');
-    return ''+
+    var html=''+
     '<div class="util"><div class="wrap"><div class="util__in">'+
       '<span><b>Среда, 7 октября 2026</b></span>'+
       '<span class="util__hide js-upd">Обновлено 09:40</span>'+
@@ -1795,8 +1805,6 @@ var EVENTS=[
         '<a href="#scr-article"><span class="ic--13" data-ic="rss"></span> RSS</a>'+
         '<span class="util__sep"></span>'+
         '<a href="#scr-article"><span class="ic--13" data-ic="mail"></span> Рассылка</a>'+
-        '<span class="util__sep"></span>'+
-        '<a href="#scr-admin">Вход для редакции</a>'+
       '</span>'+
     '</div></div></div>'+
     '<div class="wrap">'+
@@ -1812,6 +1820,9 @@ var EVENTS=[
         '</div>'+
       '</div></div>'+
     '</div>';
+    var gh=document.getElementById('global-hd');
+    gh.innerHTML=html;
+    mountIcons(gh);
   }
 
   function footerHTML(){
@@ -1852,12 +1863,12 @@ var EVENTS=[
 
   function showScreen(name){
     state.screen=name;
+    activeScreen=name;
     document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('is-on',s.id==='scr-'+name);});
-    document.querySelectorAll('.nav a[data-scr],.mnav a[data-scr]').forEach(function(t){t.classList.toggle('is-on',t.getAttribute('data-scr')===name);});
-    var h=document.getElementById('hint'); if(h) h.textContent=HINTS[name]||'';
-    var u=document.getElementById('devurl'); if(u) u.textContent=URLS[name]||'';
+    var label=(NAV.find(function(n){return n[1]===name;})?NAV.find(function(n){return n[1]===name;})[0]:'Главная');
+    document.title='WELLNESS EVENT — события в сфере ЗОЖ: '+label;
+    renderGlobalHeader();
     document.querySelectorAll('.mnav').forEach(function(m){m.classList.remove('is-open');});
-    fit();
   }
   function setWidth(w,label){
     state.width=w;
@@ -1876,11 +1887,7 @@ var EVENTS=[
 
   /* ---------------- СБОРКА ---------------- */
   mountIcons(document);
-  document.querySelectorAll('[data-header]').forEach(function(el){
-    var v=el.getAttribute('data-header');
-    el.innerHTML=headerHTML(el.closest('#scr-article')?'article':(v==='Календарь'?'calendar':(v==='Каталог'?'catalog':'home')));
-    mountIcons(el);
-  });
+  renderGlobalHeader();
   document.querySelectorAll('[data-footer]').forEach(function(el){el.innerHTML=footerHTML();mountIcons(el);});
   document.querySelectorAll('[data-cal]').forEach(renderCal);
   renderFeed();
