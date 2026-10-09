@@ -719,6 +719,45 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 #global-hd .nav a{flex:1}
 #global-hd .burger{align-self:center;margin-left:auto}
 #global-hd .mnav{border-bottom:1px solid var(--line)}
+
+/* Каталог компаний */
+.catfilt{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
+.catlayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:start}
+.catlist{display:flex;flex-direction:column;gap:12px;max-height:70vh;overflow-y:auto;padding-right:6px}
+.catcard{display:grid;grid-template-columns:92px 1fr auto;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);cursor:pointer;transition:.2s}
+.catcard:hover{border-color:var(--green-soft);background:#fff}
+.catcard.is-on{border-color:var(--green-d);box-shadow:0 0 0 2px var(--green-soft)}
+.catcard__ph{width:92px;height:92px;border-radius:var(--r-s);background:var(--tint);flex:0 0 auto;position:relative;overflow:hidden}
+.catcard__cat{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);background:var(--green-soft);padding:4px 7px;border-radius:2px;margin-bottom:6px}
+.catcard h3{font:700 17px/1.25 var(--serif);margin:2px 0 5px}
+.catcard__addr{font:400 13.5px/1.4 var(--sans);color:var(--muted);display:flex;gap:6px;align-items:flex-start}
+.catcard__addr .ic{flex:0 0 auto;margin-top:2px}
+.catcard__meta{display:flex;gap:10px;margin-top:6px;font-size:12.5px;color:var(--sec)}
+.catcard__meta b{color:var(--ink)}
+.catcard__right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.catcard__rate{font:700 14px/1 var(--serif);color:var(--ink);display:flex;align-items:center;gap:4px}
+.catcard__rate .ic{color:var(--gold)}
+.catcard__open{font:600 11.5px/1 var(--sans);padding:3px 7px;border-radius:2px;background:var(--green-soft);color:var(--green-d)}
+.catcard__open.closed{background:var(--clay-soft);color:var(--clay)}
+.catmap{position:sticky;top:160px;display:flex;flex-direction:column;gap:8px}
+.catmap__box{width:100%;height:420px;border-radius:var(--r);border:1px solid var(--line-2);background:#E8ECE5}
+.catmap__legend{display:flex;gap:18px;font:400 12px/1 var(--sans);color:var(--muted);padding:4px 2px}
+.catmap__legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.leaflet-container{font-family:var(--sans);border-radius:var(--r)}
+.cat-popup b{font:700 14.5px/1.3 var(--serif);display:block;margin-bottom:3px}
+.cat-popup small{color:var(--muted);font-size:12px;display:block;margin-bottom:6px}
+.cat-popup .tag{font-size:10px;margin-bottom:4px}
+@media (max-width:1080px){
+  .catlayout{grid-template-columns:minmax(0,1fr)}
+  .catmap{position:static;order:-1}
+  .catmap__box{height:280px}
+  .catlist{max-height:none;overflow:visible;padding-right:0}
+}
+@media (max-width:600px){
+  .catcard{grid-template-columns:68px 1fr;gap:10px}
+  .catcard__ph{width:68px;height:68px}
+  .catcard__right{grid-column:1 / span 2;flex-direction:row;align-items:center;justify-content:space-between}
+}
 </style>
 
 
@@ -794,6 +833,7 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
   .screen{display:none}
   .screen.is-on{display:block}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body class="ads-off">
 
@@ -1366,17 +1406,40 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
   <footer class="ft" data-footer></footer>
 </section>
 
-<!-- ============ ЭКРАН КАТАЛОГ (скоро) ============ -->
+<!-- ============ ЭКРАН 7. КАТАЛОГ (с картой) ============ -->
 <section class="screen" id="scr-catalog">
-  <div class="wrap sec sec--first" style="min-height:60vh;display:flex;align-items:center">
-    <div style="max-width:680px;margin:0 auto;text-align:center">
-      <div style="width:80px;height:80px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px"><span class="ic--30" data-ic="pin"></span></div>
-      <h1 style="font-size:34px">Каталог компаний скоро откроется</h1>
-      <p class="lead" style="margin:14px auto 0;max-width:560px">В каталоге будут собраны студии йоги, фитнес-залы, центры здоровья, магазины здорового питания и клиники — с адресом, отметкой на карте, рейтингом и расписанием. Запуск в ноябре 2026.</p>
-      <form class="form" data-sub style="max-width:440px;margin:28px auto 0;justify-content:center">
-        <div class="field"><input class="inp" type="email" placeholder="Ваш e-mail, чтобы сообщить о запуске"></div>
-        <button class="btn btn--green" type="submit">Уведомить о запуске</button>
-      </form>
+  <div class="wrap sec sec--first">
+    <div class="sec__head">
+      <div>
+        <p class="kicker">Каталог</p>
+        <h1>Места и специалисты</h1>
+        <p class="lead" style="max-width:640px;margin-top:8px">Студии йоги, массажные салоны, фитнес-клубы, нутрициологи и тренеры в городе — с адресами, отметками на карте и отзывами посетителей.</p>
+      </div>
+      <div class="sec__head__act">
+        <button class="btn btn--ghost btn--sm" type="button"><span class="ic--16" data-ic="plus"></span> Добавить место</button>
+      </div>
+    </div>
+
+    <div class="catfilt" id="cat-filt">
+      <button class="fchip is-on" data-cat="all">Все</button>
+      <button class="fchip" data-cat="yoga">Йога</button>
+      <button class="fchip" data-cat="massage">Массаж</button>
+      <button class="fchip" data-cat="fitness">Фитнес-клубы</button>
+      <button class="fchip" data-cat="trainer">Тренеры</button>
+      <button class="fchip" data-cat="nutri">Нутрициологи</button>
+      <button class="fchip" data-cat="med">Медитация</button>
+      <button class="fchip" data-cat="food">Здоровое питание</button>
+    </div>
+
+    <div class="catlayout">
+      <div class="catlist" id="catlist"></div>
+      <div class="catmap">
+        <div id="cat-map" class="catmap__box"></div>
+        <div class="catmap__legend">
+          <span><i style="background:var(--green)"></i> Открыто сейчас</span>
+          <span><i style="background:var(--clay)"></i> По расписанию</span>
+        </div>
+      </div>
     </div>
   </div>
   <footer class="ft" data-footer></footer>
@@ -1715,6 +1778,96 @@ var EVENTS=[
     mountIcons(host);
   }
 
+
+  /* ---------- КАТАЛОГ КОМПАНИЙ С КАРТОЙ ---------- */
+  var PLACES=[
+    {id:1, cat:'yoga',    name:'Студия йоги «Прана»',      addr:'ул. Ротшильда, 45',       hours:'07:00–22:00', open:true,  rate:4.8, rev:342, lat:32.0684, lng:34.7728, ph:'yoga',   tag:'Йога'},
+    {id:2, cat:'yoga',    name:'Йога-центр «Ананда»',     addr:'бульвар Ротшильда, 82',   hours:'08:00–21:30', open:true,  rate:4.7, rev:198, lat:32.0649, lng:34.7790, ph:'yoga',   tag:'Йога'},
+    {id:3, cat:'massage', name:'Массажный салон «Тело»',   addr:'ул. Дизенгоф, 120',       hours:'09:00–21:00', open:true,  rate:4.9, rev:421, lat:32.0846, lng:34.7735, ph:'medit',  tag:'Массаж'},
+    {id:4, cat:'massage', name:'Lomi Lomi Studio',        addr:'ул. Бен-Йехуда, 52',      hours:'10:00–20:00', open:true,  rate:4.6, rev:87,  lat:32.0794, lng:34.7699, ph:'mara2',  tag:'Массаж'},
+    {id:5, cat:'fitness', name:'Фитнес-клуб «Nordic Gym»',addr:'ул. Аленби, 70',          hours:'06:30–23:00', open:true,  rate:4.5, rev:612, lat:32.0646, lng:34.7742, ph:'bike',   tag:'Фитнес'},
+    {id:6, cat:'fitness', name:'Студия функционального тренинга «Base»', addr:'ул. Ибн-Гвироль, 130', hours:'07:00–22:00', open:false, rate:4.8, rev:156, lat:32.0825, lng:34.7795, ph:'mara2', tag:'Фитнес'},
+    {id:7, cat:'trainer', name:'Ольга Лебедева — йога',   addr:'Центр «Пространство»',     hours:'по записи',  open:false, rate:5.0, rev:72,  lat:32.0712, lng:34.7866, ph:'column', tag:'Тренер'},
+    {id:8, cat:'trainer', name:'Сергей Антонов — беговой тренер', addr:'Парк «Яркон»',     hours:'утро/вечер',  open:true,  rate:4.9, rev:129, lat:32.0940, lng:34.8070, ph:'mara',   tag:'Тренер'},
+    {id:9, cat:'nutri',   name:'Мария Климова, нутрициолог', addr:'Клиника «Рамбам»',     hours:'по записи',  open:false, rate:4.8, rev:214, lat:32.0730, lng:34.7900, ph:'food',   tag:'Нутрициолог'},
+    {id:10,cat:'med',     name:'Центр медитации «Тишина»',addr:'ул. Нахалат Биньямин, 18',hours:'08:00–21:00', open:true,  rate:4.7, rev:98,  lat:32.0680, lng:34.7690, ph:'medit',  tag:'Медитация'},
+    {id:11,cat:'food',    name:'Магазин органических продуктов «Green»', addr:'ул. Шенкин, 33', hours:'08:00–22:00', open:true, rate:4.6, rev:265, lat:32.0727, lng:34.7752, ph:'salad',tag:'Питание'},
+    {id:12,cat:'food',    name:'Вегетарианское кафе «Roots»', addr:'ул. Бялика, 14',      hours:'10:00–23:00', open:true,  rate:4.5, rev:388, lat:32.0768, lng:34.7793, ph:'bills',  tag:'Кафе'}
+  ];
+  var catFilt='all';
+  var catMap=null;
+  var catMarkers=[];
+
+  function renderCatalog(){
+    var host=document.getElementById('catlist'); if(!host) return;
+    var list=PLACES.filter(function(p){return catFilt==='all' || p.cat===catFilt;});
+    host.innerHTML=list.map(function(p){
+      var openCls=p.open?'':'closed';
+      var openText=p.open?'Открыто':'Закрыто';
+      return '<article class="catcard" data-id="'+p.id+'">'+
+        '<div class="catcard__ph ph__bg"><span class="ph__bg im--'+p.ph+'" role="img" style="position:absolute;inset:0;background-size:cover;background-position:center;border-radius:var(--r-s)"></span></div>'+
+        '<div>'+
+          '<span class="catcard__cat">'+p.tag+'</span>'+
+          '<h3>'+p.name+'</h3>'+
+          '<div class="catcard__addr"><span class="ic--13" data-ic="pin"></span> '+p.addr+'</div>'+
+          '<div class="catcard__meta">'+
+            '<span class="catcard__rate"><span class="ic--13" data-ic="starfill"></span> '+p.rate+'</span>'+
+            '<span>· '+p.rev+' отзывов</span>'+
+            '<span>· '+p.hours+'</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="catcard__right">'+
+          '<span class="catcard__open '+openCls+'">'+openText+'</span>'+
+          '<a class="btn btn--ghost btn--sm" href="#scr-article">Подробнее</a>'+
+        '</div>'+
+      '</article>';
+    }).join('');
+    mountIcons(host);
+    // клик по карточке — центрировать карту
+    host.querySelectorAll('.catcard').forEach(function(card){
+      card.addEventListener('click',function(){
+        host.querySelectorAll('.catcard').forEach(function(c){c.classList.remove('is-on');});
+        card.classList.add('is-on');
+        var id=+card.getAttribute('data-id');
+        var p=PLACES.find(function(x){return x.id===id;});
+        if(catMap && p) catMap.flyTo([p.lat,p.lng],15,{duration:.6});
+      });
+    });
+    if(catMap) renderCatPins(list);
+  }
+
+  function renderCatPins(list){
+    catMarkers.forEach(function(m){catMap.removeLayer(m);});
+    catMarkers=[];
+    list.forEach(function(p){
+      var icon=L.divIcon({
+        className:'cat-pin',
+        html:'<span style="display:block;width:22px;height:22px;border-radius:50%;background:'+(p.open?'var(--green)':'var(--clay)')+';border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)"></span>',
+        iconSize:[22,22], iconAnchor:[11,11]
+      });
+      var marker=L.marker([p.lat,p.lng],{icon:icon}).addTo(catMap);
+      marker.bindPopup('<div class="cat-popup"><span class="catcard__cat">'+p.tag+'</span><b>'+p.name+'</b><small>'+p.addr+' · '+p.hours+'</small><a class="btn btn--green btn--sm" href="#scr-article">Подробнее</a></div>');
+      catMarkers.push(marker);
+    });
+    if(catMarkers.length){
+      var group=L.featureGroup(catMarkers);
+      catMap.fitBounds(group.getBounds().pad(0.15));
+    }
+  }
+
+  function initCatMap(){
+    var box=document.getElementById('cat-map'); if(!box || catMap) return;
+    if(!window.L){ setTimeout(initCatMap,200); return; }
+    catMap=L.map(box,{zoomControl:true,scrollWheelZoom:false}).setView([32.08,34.78],13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      maxZoom:19,
+      attribution:'© OpenStreetMap contributors'
+    }).addTo(catMap);
+    box.addEventListener('mouseenter',function(){catMap.scrollWheelZoom.enable();});
+    box.addEventListener('mouseleave',function(){catMap.scrollWheelZoom.disable();});
+    setTimeout(function(){catMap.invalidateSize(); renderCatalog();},100);
+  }
+
   /* ---------- КОРОТКАЯ ЛЕНТА СОБЫТИЙ НА ГЛАВНОЙ ---------- */
   function renderShortFeed(){
     var host=document.getElementById('evfeed-short'); if(!host) return;
@@ -1782,7 +1935,7 @@ var EVENTS=[
   }
 
   /* ---------------- ШАПКА И ФУТЕР ПОРТАЛА ---------------- */
-  var NAV=[['Главная','home'],['Новости','news'],['Wellness календарь','calendar'],['Обзор мероприятий','reviews'],['Полезное','article'],['Курсы','courses']];
+  var NAV=[['Новости','news'],['Wellness календарь','calendar'],['Обзор мероприятий','reviews'],['Полезное','article'],['Курсы и обучение','courses'],['Каталог','catalog'],['Сообщество','community',true]];
 
   var activeScreen='home';
   function renderGlobalHeader(){
@@ -1827,7 +1980,7 @@ var EVENTS=[
 
   function footerHTML(){
     var sections=[
-      ['Разделы',[['Новости','news'],['Wellness календарь','calendar'],['Обзор мероприятий','reviews'],['Полезное','article'],['Курсы и обучение','courses']]],
+      ['Разделы',[['Новости','news'],['Wellness календарь','calendar'],['Обзор мероприятий','reviews'],['Полезное','article'],['Курсы и обучение','courses'],['Каталог','catalog'],['Сообщество','community']]],
       ['Читателям',[['Рассылка Wellness Weekly','home'],['Напоминания о событиях','calendar'],['Комментарии и обсуждения','community']]],
       ['Проект',[['Реклама на сайте','home'],['Партнёрские материалы','courses'],['Каталог компаний (скоро)','catalog']]]
     ];
@@ -1869,6 +2022,7 @@ var EVENTS=[
     document.title='WELLNESS EVENT — события в сфере ЗОЖ: '+label;
     renderGlobalHeader();
     document.querySelectorAll('.mnav').forEach(function(m){m.classList.remove('is-open');});
+    if(name==='catalog'){ setTimeout(initCatMap,60); }
   }
   function setWidth(w,label){
     state.width=w;
@@ -1893,6 +2047,7 @@ var EVENTS=[
   renderFeed();
   renderList();
   renderCourses();
+  renderCatalog();
   renderShortFeed();
   renderSoon();
   showScreen('home');
@@ -2273,5 +2428,6 @@ var EVENTS=[
 })();
 </script>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </body>
 </html>
