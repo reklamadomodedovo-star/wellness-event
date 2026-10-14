@@ -719,9 +719,13 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 #global-hd .mnav{border-bottom:1px solid var(--line)}
 
 /* Каталог компаний */
+
+.catsearch{margin-bottom:10px;max-width:560px}
+.catsearch .search{display:flex;align-items:center;background:var(--tint);border:1px solid var(--line-2);border-radius:6px;padding:4px 4px 4px 10px}
+.catsearch input{flex:1;border:0;background:transparent;padding:8px 6px;font:400 14px/1.4 var(--sans);outline:none;min-width:0}
 .catfilt{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
-.catlayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:start}
-.catlist{display:flex;flex-direction:column;gap:12px;max-height:70vh;overflow-y:auto;padding-right:6px}
+.catlayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
+.catlist{display:flex;flex-direction:column;gap:12px;max-height:640px;overflow-y:auto;padding-right:6px;min-width:0}
 .catcard{display:grid;grid-template-columns:92px 1fr auto;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);cursor:pointer;transition:.2s}
 .catcard:hover{border-color:var(--green-soft);background:#fff}
 .catcard.is-on{border-color:var(--green-d);box-shadow:0 0 0 2px var(--green-soft)}
@@ -737,11 +741,10 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 .catcard__rate .ic{color:var(--gold)}
 .catcard__open{font:600 11.5px/1 var(--sans);padding:3px 7px;border-radius:2px;background:var(--green-soft);color:var(--green-d)}
 .catcard__open.closed{background:var(--clay-soft);color:var(--clay)}
-.catmap{position:sticky;top:160px;display:flex;flex-direction:column;gap:8px}
-.catmap__box{width:100%;height:420px;border-radius:var(--r);border:1px solid var(--line-2);background:#E8ECE5}
+.catmap{display:flex;flex-direction:column;gap:8px;min-width:0}
+.catmap__box{width:100%;height:520px;border-radius:var(--r);border:1px solid var(--line-2);background:#E8ECE5}
 .catmap__legend{display:flex;gap:18px;font:400 12px/1 var(--sans);color:var(--muted);padding:4px 2px}
 .catmap__legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
-.leaflet-container{font-family:var(--sans);border-radius:var(--r)}
 .cat-popup b{font:700 14.5px/1.3 var(--serif);display:block;margin-bottom:3px}
 .cat-popup small{color:var(--muted);font-size:12px;display:block;margin-bottom:6px}
 .cat-popup .tag{font-size:10px;margin-bottom:4px}
@@ -761,6 +764,21 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 .sub .brand img, .site.theme-dark .brand--top img{filter:invert(1) grayscale(1) contrast(1.1)}
 
 #scr-courses,#scr-community{display:none!important}
+
+/* Yandex Maps overrides */
+.cat-popup-btn{background:#F4EAD8!important;color:#1F4D35!important;border:0!important;padding:8px 14px!important;border-radius:var(--r-s)!important;cursor:pointer!important;font:600 13px/1 var(--sans)!important;margin-top:6px!important;display:inline-block}
+.ymaps-2-1-79-balloon__content{padding:14px 18px!important;font-family:var(--sans)!important}
+.ymaps-2-1-79-balloon__layout{border-radius:var(--r)!important;box-shadow:0 8px 30px rgba(15,26,18,.18)!important}
+.ymaps-2-1-79-balloon__close{right:12px!important;top:12px!important}
+.ymaps-2-1-79-balloon__tail{display:none}
+[class*="ymaps"][class*="icon"]{filter:none!important}
+/* Modal */
+.cat-modal{position:fixed;inset:0;background:rgba(10,20,15,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.cat-modal.is-open{display:flex}
+.cat-modal__box{background:#fff;border-radius:var(--r);max-width:640px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 26px 80px rgba(15,26,18,.3)}
+.cat-modal__ph{position:relative;aspect-ratio:16/8;background:var(--tint);overflow:hidden}
+.cat-modal__ph .ph__bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.cat-modal__close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(15,26,18,.55);color:#fff;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
 </style>
 
 
@@ -836,7 +854,6 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
   .screen{display:none}
   .screen.is-on{display:block}
 </style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body class="ads-off">
 
@@ -1148,18 +1165,22 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
       <div>
         <p class="kicker">Wellness календарь</p>
         <h1 style="font-size:38px">События в сфере ЗОЖ</h1>
-        <p style="margin-top:10px;max-width:820px;font-size:17px">Все события осени: забеги, йога, лекции о питании, мастер-классы и медитации. Фильтры по типу и формату помогут подобрать подходящее. Иконки в ячейках календаря показывают тип события.</p>
+        <p style="margin-top:10px;max-width:820px;font-size:17px">Все события осени: забеги, йога, лекции о питании, мастер-классы и медитации. Фильтры по типу и району помогут подобрать подходящее.</p>
       </div>
     </div>
 
     <div class="filters" id="filters">
       <button class="fchip is-on" data-ftype="all">Все типы</button>
-      <button class="fchip" data-ftype="Бег">🏃 Бег</button>
-      <button class="fchip" data-ftype="Йога">🧘 Йога</button>
-      <button class="fchip" data-ftype="Питание">🥗 Питание</button>
-      <button class="fchip" data-ftype="Лекция">🎤 Лекции</button>
-      <button class="fchip" data-ftype="Велосипед">🚴 Велосипед</button>
-      <button class="fchip" data-ftype="Медитация">🌿 Медитация</button>
+      <button class="fchip" data-ftype="Бег">Бег</button>
+      <button class="fchip" data-ftype="Йога">Йога</button>
+      <button class="fchip" data-ftype="Питание">Питание</button>
+      <button class="fchip" data-ftype="Лекция">Лекции</button>
+      <button class="fchip" data-ftype="Велосипед">Велосипед</button>
+      <button class="fchip" data-ftype="Медитация">Медитация</button>
+      <button class="fchip" data-ftype="Движение">Движение</button>
+      <button class="fchip" data-ftype="Красота и здоровье">Красота и здоровье</button>
+      <button class="fchip" data-ftype="Ментальное здоровье">Ментальное здоровье</button>
+      <button class="fchip" data-ftype="Образ жизни">Образ жизни</button>
       <span style="width:16px;display:inline-block"></span>
       <button class="fchip" data-floc="all">Все районы</button>
       <button class="fchip" data-floc="Центр">Центр</button>
@@ -1169,27 +1190,23 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
       <label class="chk"><input type="checkbox" data-fprice><span>Только бесплатные</span></label>
     </div>
 
-    <div class="split">
-      <div>
-        <div class="sec__head sec__head--tight"><div><h2 id="evcount" style="font-size:22px"></h2></div></div>
-        <div id="evlist"></div>
-        <div class="row mt32" style="justify-content:center"><button class="btn btn--ghost" type="button" data-more="ev">Показать ещё</button></div>
+    <div class="sec__head sec__head--tight"><div><h2 id="evcount" style="font-size:22px"></h2></div></div>
+    <div id="evlist"></div>
+    <div class="row mt32" style="justify-content:center"><button class="btn btn--ghost" type="button" data-more="ev">Показать ещё</button></div>
+
+    <div class="g g2 mt40">
+      <div class="aside__box">
+        <h3>Ближайшие события</h3>
+        <ol class="topnum topnum--time" id="cal-soon"></ol>
       </div>
-      <aside>
-        <div class="cal" data-cal="page"></div>
-        <div class="aside__box mt24">
-          <h3>Ближайшие события</h3>
-          <ol class="topnum topnum--time" id="cal-soon"></ol>
+      <div class="native">
+        <span class="native__ic"><span class="ic--20" data-ic="bell"></span></span>
+        <div>
+          <span class="native__lbl">Напоминания</span>
+          <h4 class="native__t">Подпишитесь на уведомления о событиях по вашим интересам</h4>
+          <span class="track">Письмо за день и за час до начала</span>
         </div>
-        <div class="native mt24">
-          <span class="native__ic"><span class="ic--20" data-ic="bell"></span></span>
-          <div>
-            <span class="native__lbl">Напоминания</span>
-            <h4 class="native__t">Подпишитесь на уведомления о событиях по вашим интересам</h4>
-            <span class="track">Письмо за день и за час до начала</span>
-          </div>
-        </div>
-      </aside>
+      </div>
     </div>
   </div>
   <footer class="ft" data-footer></footer>
@@ -1388,11 +1405,11 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
     </div>
     <div class="filters">
       <button class="fchip is-on" data-cdir="all">Все направления</button>
-      <button class="fchip" data-cdir="Нутрициология">🥗 Нутрициология</button>
-      <button class="fchip" data-cdir="Йога">🧘 Йога</button>
-      <button class="fchip" data-cdir="Фитнес">🏋️ Фитнес</button>
-      <button class="fchip" data-cdir="Медитация">🌿 Медитация</button>
-      <button class="fchip" data-cdir="Подготовка тренеров">🎓 Для тренеров</button>
+      <button class="fchip" data-cdir="Нутрициология">Нутрициология</button>
+      <button class="fchip" data-cdir="Йога">Йога</button>
+      <button class="fchip" data-cdir="Фитнес">Фитнес</button>
+      <button class="fchip" data-cdir="Медитация">Медитация</button>
+      <button class="fchip" data-cdir="Подготовка тренеров">Для тренеров</button>
       <span style="width:16px;display:inline-block"></span>
       <button class="fchip is-on" data-cform="all">Любой формат</button>
       <button class="fchip" data-cform="Онлайн">Онлайн</button>
@@ -1421,7 +1438,8 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
     </div>
 
-    <div class="catfilt" id="cat-filt">
+    <div class="catsearch"><div class="search"><span class="ic--20" data-ic="search" style="color:var(--faint);margin-left:2px"></span><input class="inp" id="cat-q" type="search" placeholder="Поиск по названию, адресу или метро" aria-label="Поиск по каталогу"></div></div>
+<div class="catfilt" id="cat-filt">
       <button class="fchip is-on" data-cat="all">Все</button>
       <button class="fchip" data-cat="yoga">Йога</button>
       <button class="fchip" data-cat="pilates">Пилатес / растяжка</button>
@@ -1442,12 +1460,12 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
       <div class="catmap">
         <div id="cat-map" class="catmap__box"></div>
         <div class="catmap__legend">
-          <span><i style="background:var(--green)"></i> Открыто сейчас</span>
-          <span><i style="background:var(--clay)"></i> По расписанию</span>
+          <span><i style="background:#2E7D5B"></i> Места на карте</span>
         </div>
       </div>
     </div>
   </div>
+  <div class="cat-modal" id="cat-modal" role="dialog" aria-modal="true"><div class="cat-modal__box"><button class="cat-modal__close" type="button" data-close><span style="font-size:18px;line-height:1">✕</span></button><div class="cat-modal__body"></div></div></div>
   <footer class="ft" data-footer></footer>
 </section>
 
@@ -1578,7 +1596,7 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
   /* ---------------- ДАННЫЕ СОБЫТИЙ ---------------- */
   /* фото для карточек мероприятий: соответствуют порядку EVENTS */
   var EVIMG=['yoga','run','food-fest','mara2','salad','lect','medit','swim','bike','nutr','retreat'];
-var EVTYPES={yoga:'🧘',run:'🏃',food:'🥗',lect:'🎤',bike:'🚴',medit:'🌿',sw:'🏊',nutr:'🥑',retreat:'🌳'};
+var EVTYPES={yoga:'',run:'',food:'',lect:'',bike:'',medit:'',sw:'',nutr:'',retreat:''};
 var EVENTS=[
     {iso:'2026-10-10',d:'10',mon:'окт',weekday:'пятница',time:'20:00',type:'Медитация',place:'Центр «Пространство»',district:'Центр',addr:'ул. Садовая, 14',free:false,price:'1 200 ₽',dur:'2 часа',forAud:'Взрослым, 16+',
      ic:'medit',
@@ -1783,35 +1801,49 @@ var EVENTS=[
   }
 
 
-  /* ---------- КАТАЛОГ КОМПАНИЙ С КАРТОЙ ---------- */
+  /* ---------- КАТАЛОГ КОМПАНИЙ С ЯНДЕКС.КАРТОЙ ---------- */
   var PLACES=[
-    {id:1, cat:'yoga',    name:'Студия йоги «Прана»',          addr:'Большая Дмитровка, 12',      metro:'Театральная', hours:'07:00–22:00', open:true,  rate:4.8, rev:412, lat:55.7601, lng:37.6133, ph:'yoga',   tag:'Йога'},
-    {id:2, cat:'yoga',    name:'Йога-дом «Ананда»',           addr:'Мясницкая ул., 24/7',         metro:'Чистые пруды', hours:'08:00–21:30', open:true,  rate:4.7, rev:286, lat:55.7647, lng:37.6365, ph:'yoga',   tag:'Йога'},
-    {id:3, cat:'pilates', name:'Пилатес-студия «Body Balance»',addr:'Кутузовский проспект, 36',   metro:'Кутузовская', hours:'08:00–22:00', open:true,  rate:4.9, rev:193, lat:55.7420, lng:37.5566, ph:'mara2',  tag:'Пилатес'},
-    {id:4, cat:'massage', name:'Массажный салон «Тело.ру»',   addr:'Новый Арбат, 21',             metro:'Арбатская',   hours:'09:00–21:00', open:true,  rate:4.8, rev:524, lat:55.7519, lng:37.5907, ph:'medit',  tag:'Массаж'},
-    {id:5, cat:'spa',     name:'SPA-клуб «Термы»',            addr:'Рублёвское ш., 52',           metro:'Молодёжная', hours:'10:00–22:00', open:true,  rate:4.7, rev:872, lat:55.7390, lng:37.4740, ph:'swim',   tag:'SPA'},
-    {id:6, cat:'fitness', name:'World Class Тверская',        addr:'Тверская ул., 18',            metro:'Тверская',    hours:'06:30–23:30', open:true,  rate:4.6, rev:1240,lat:55.7613, lng:37.6066, ph:'bike',   tag:'Фитнес'},
-    {id:7, cat:'swim',    name:'Бассейн «Олимпийский»',       addr:'Олимпийский просп., 16',      metro:'Проспект Мира',hours:'06:30–22:00',open:false, rate:4.5, rev:683, lat:55.7862, lng:37.6220, ph:'swim',   tag:'Бассейн'},
-    {id:8, cat:'trainer', name:'Ольга Лебедева — хатха-йога', addr:'Парк Горького, студия',       metro:'Октябрьская', hours:'по записи',   open:false, rate:5.0, rev:94,  lat:55.7293, lng:37.6052, ph:'column', tag:'Тренер'},
-    {id:9, cat:'trainer', name:'Андрей Морозов — бег',        addr:'Лужнецкая наб., тренировки',  metro:'Воробьёвы горы',hours:'утро/вечер',open:true, rate:4.9, rev:168, lat:55.7140, lng:37.5680, ph:'mara',   tag:'Тренер'},
-    {id:10,cat:'nutri',   name:'Мария Климова, нутрициолог',  addr:'Клиника «Рассвет»',           metro:'Курская',    hours:'по записи',   open:false, rate:4.8, rev:241, lat:55.7578, lng:37.6572, ph:'food',   tag:'Нутрициолог'},
-    {id:11,cat:'med',     name:'Центр медитации «Тишина»',    addr:'Большой Козихинский пер., 12',metro:'Маяковская', hours:'08:00–21:00', open:true,  rate:4.7, rev:156, lat:55.7637, lng:37.5973, ph:'medit',  tag:'Медитация'},
-    {id:12,cat:'clinic',  name:'Клиника интегративной медицины DocMed', addr:'Садовническая наб., 75', metro:'Павелецкая', hours:'09:00–21:00', open:true, rate:4.8, rev:503, lat:55.7354, lng:37.6443, ph:'depot', tag:'Клиника'},
-    {id:13,cat:'food',    name:'«Город-Сад» органик-маркет',  addr:'Большая Никитская, 17',       metro:'Арбатская',   hours:'08:00–22:00', open:true,  rate:4.6, rev:312, lat:55.7552, lng:37.6032, ph:'salad',  tag:'Магазин'},
-    {id:14,cat:'cafe',    name:'VegaCafe вегетарианское',     addr:'ул. Солянка, 4',              metro:'Китай-город',hours:'10:00–23:00', open:true,  rate:4.5, rev:487, lat:55.7530, lng:37.6360, ph:'bills',  tag:'Кафе'}
+    {id:1, cat:'yoga',    name:'Студия йоги «Прана»',          addr:'Большая Дмитровка, 12',      metro:'Театральная', hours:'07:00–22:00', open:true,  rate:4.8, rev:412, lat:55.7601, lng:37.6133, ph:'yoga',   tag:'Йога', desc:'Студия классической хатха-йоги в центре. Группы до 12 человек, опытные преподаватели, утренние и вечерние классы.'},
+    {id:2, cat:'yoga',    name:'Йога-дом «Ананда»',           addr:'Мясницкая ул., 24/7',         metro:'Чистые пруды', hours:'08:00–21:30', open:true,  rate:4.7, rev:286, lat:55.7647, lng:37.6365, ph:'yoga',   tag:'Йога', desc:'Йога для начинающих и продолжающих: хатха, айенгара, кундалини, йога-нидра.'},
+    {id:3, cat:'pilates', name:'Пилатес-студия «Body Balance»',addr:'Кутузовский проспект, 36',   metro:'Кутузовская', hours:'08:00–22:00', open:true,  rate:4.9, rev:193, lat:55.7420, lng:37.5566, ph:'mara2',  tag:'Пилатес', desc:'Пилатес на реформерах и мате, восстановительные практики, индивидуальные и групповые занятия.'},
+    {id:4, cat:'massage', name:'Массажный салон «Тело.ру»',   addr:'Новый Арбат, 21',             metro:'Арбатская',   hours:'09:00–21:00', open:true,  rate:4.8, rev:524, lat:55.7519, lng:37.5907, ph:'medit',  tag:'Массаж', desc:'Классический, спортивный, лимфодренажный, тайский массаж. Сертифицированные мастера.'},
+    {id:5, cat:'spa',     name:'SPA-клуб «Термы»',            addr:'Рублёвское ш., 52',           metro:'Молодёжная', hours:'10:00–22:00', open:true,  rate:4.7, rev:872, lat:55.7390, lng:37.4740, ph:'swim',   tag:'SPA', desc:'Термальный комплекс с бассейнами, саунами, хамамом, авторскими SPA-программами.'},
+    {id:6, cat:'fitness', name:'World Class Тверская',        addr:'Тверская ул., 18',            metro:'Тверская',    hours:'06:30–23:30', open:true,  rate:4.6, rev:1240,lat:55.7613, lng:37.6066, ph:'bike',   tag:'Фитнес', desc:'Премиальный фитнес-клуб: тренажёрный зал, групповые программы, бассейн, SPA, детская комната.'},
+    {id:7, cat:'swim',    name:'Бассейн «Олимпийский»',       addr:'Олимпийский просп., 16',      metro:'Проспект Мира',hours:'06:30–22:00',open:false, rate:4.5, rev:683, lat:55.7862, lng:37.6220, ph:'swim',   tag:'Бассейн', desc:'50-метровый Olympic бассейн, группы для взрослых и детей, аквааэробика, свободное плавание.'},
+    {id:8, cat:'trainer', name:'Ольга Лебедева — хатха-йога', addr:'Парк Горького, студия',       metro:'Октябрьская', hours:'по записи',   open:false, rate:5.0, rev:94,  lat:55.7293, lng:37.6052, ph:'column', tag:'Тренер', desc:'Сертифицированный преподаватель хатха-йоги (E-RYT 500), индивидуальные практики, курсы для начинающих.'},
+    {id:9, cat:'trainer', name:'Андрей Морозов — бег',        addr:'Лужнецкая наб., тренировки',  metro:'Воробьёвы горы',hours:'утро/вечер',open:true, rate:4.9, rev:168, lat:55.7140, lng:37.5680, ph:'mara',   tag:'Тренер', desc:'Тренер по бегу, подготовка к полумарафонам, индивидуальные планы, тренировки в Лужниках и на Воробьёвых.'},
+    {id:10,cat:'nutri',   name:'Мария Климова, нутрициолог',  addr:'Клиника «Рассвет»',           metro:'Курская',    hours:'по записи',   open:false, rate:4.8, rev:241, lat:55.7578, lng:37.6572, ph:'food',   tag:'Нутрициолог', desc:'Клинический нутрициолог, составление рациона, работа с пищевым поведением, сопровождение при снижении веса.'},
+    {id:11,cat:'med',     name:'Центр медитации «Тишина»',    addr:'Большой Козихинский пер., 12',metro:'Маяковская', hours:'08:00–21:00', open:true,  rate:4.7, rev:156, lat:55.7637, lng:37.5973, ph:'medit',  tag:'Медитация', desc:'Групповые медитации, курсы осознанности (MBSR), ретриты выходного дня.'},
+    {id:12,cat:'clinic',  name:'Клиника интегративной медицины DocMed', addr:'Садовническая наб., 75', metro:'Павелецкая', hours:'09:00–21:00', open:true, rate:4.8, rev:503, lat:55.7354, lng:37.6443, ph:'depot', tag:'Клиника', desc:'Интегративная медицина: антивозрастные программы, check-up, врачи интегративной медицины, нутрициологи, остеопаты.'},
+    {id:13,cat:'food',    name:'«Город-Сад» органик-маркет',  addr:'Большая Никитская, 17',       metro:'Арбатская',   hours:'08:00–22:00', open:true,  rate:4.6, rev:312, lat:55.7552, lng:37.6032, ph:'salad',  tag:'Магазин', desc:'Сеть магазинов экопродуктов: свежие овощи и фрукты, суперфуды, безглютеновые продукты, кулинария.'},
+    {id:14,cat:'cafe',    name:'VegaCafe вегетарианское',     addr:'ул. Солянка, 4',              metro:'Китай-город',hours:'10:00–23:00', open:true,  rate:4.5, rev:487, lat:55.7530, lng:37.6360, ph:'bills',  tag:'Кафе', desc:'Вегетарианское и веганское кафе с сезонным меню, смузи, боулами и raw-десертами.'}
   ];
   var catFilt='all';
+  var catQuery='';
   var catMap=null;
-  var catMarkers=[];
+  var catPlacemarks=[];
+  var catActivePlace=null;
+
+  function catFilteredList(){
+    return PLACES.filter(function(p){
+      if(catFilt!=='all' && p.cat!==catFilt) return false;
+      if(catQuery){
+        var q=catQuery.toLowerCase().trim();
+        var hay=(p.name+' '+p.addr+' '+p.metro+' '+p.tag).toLowerCase();
+        if(hay.indexOf(q)<0) return false;
+      }
+      return true;
+    });
+  }
 
   function renderCatalog(){
     var host=document.getElementById('catlist'); if(!host) return;
-    var list=PLACES.filter(function(p){return catFilt==='all' || p.cat===catFilt;});
-    host.innerHTML=list.map(function(p){
+    var list=catFilteredList();
+    host.innerHTML=list.length ? list.map(function(p){
       var openCls=p.open?'':'closed';
-      var openText=p.open?'Открыто':'Закрыто';
+      var openText=p.open?'Открыто сейчас':'Закрыто';
       return '<article class="catcard" data-id="'+p.id+'">'+
-        '<div class="catcard__ph ph__bg"><span class="ph__bg im--'+p.ph+'" role="img" style="position:absolute;inset:0;background-size:cover;background-position:center;border-radius:var(--r-s)"></span></div>'+
+        '<div class="catcard__ph"><span class="ph__bg im--'+p.ph+'" role="img" style="position:absolute;inset:0;background-size:cover;background-position:center;border-radius:var(--r-s)"></span></div>'+
         '<div>'+
           '<span class="catcard__cat">'+p.tag+'</span>'+
           '<h3>'+p.name+'</h3>'+
@@ -1823,55 +1855,122 @@ var EVENTS=[
         '</div>'+
         '<div class="catcard__right">'+
           '<span class="catcard__open '+openCls+'">'+openText+'</span>'+
-          '<a class="btn btn--ghost btn--sm" href="#scr-article">Подробнее</a>'+
+          '<button class="btn btn--ghost btn--sm" type="button" data-place="'+p.id+'">Подробнее</button>'+
         '</div>'+
       '</article>';
-    }).join('');
+    }).join('') : '<p class="lead" style="grid-column:1/-1;padding:40px 0">Ничего не найдено. Сбросьте фильтры или измените поисковый запрос.</p>';
     mountIcons(host);
-    // клик по карточке — центрировать карту
     host.querySelectorAll('.catcard').forEach(function(card){
-      card.addEventListener('click',function(){
+      card.addEventListener('click',function(e){
+        if(e.target.closest('button')) return;
         host.querySelectorAll('.catcard').forEach(function(c){c.classList.remove('is-on');});
         card.classList.add('is-on');
         var id=+card.getAttribute('data-id');
         var p=PLACES.find(function(x){return x.id===id;});
-        if(catMap && p) catMap.flyTo([p.lat,p.lng],15,{duration:.6});
+        if(catMap && p){
+          catMap.setCenter([p.lat,p.lng],15,{duration:400});
+          openCatPopup(p);
+        }
+      });
+    });
+    host.querySelectorAll('[data-place]').forEach(function(b){
+      b.addEventListener('click',function(e){
+        e.stopPropagation();
+        var p=PLACES.find(function(x){return x.id===+b.getAttribute('data-place');});
+        if(p) openPlaceModal(p);
       });
     });
     if(catMap) renderCatPins(list);
   }
 
   function renderCatPins(list){
-    catMarkers.forEach(function(m){catMap.removeLayer(m);});
-    catMarkers=[];
+    catPlacemarks.forEach(function(pm){catMap.geoObjects.remove(pm);});
+    catPlacemarks=[];
+    var collection=new ymaps.GeoObjectCollection();
     list.forEach(function(p){
-      var icon=L.divIcon({
-        className:'cat-pin',
-        html:'<span style="display:block;width:22px;height:22px;border-radius:50%;background:'+(p.open?'var(--green)':'var(--clay)')+';border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)"></span>',
-        iconSize:[22,22], iconAnchor:[11,11]
+      var pm=new ymaps.Placemark([p.lat,p.lng],{
+        hintContent:p.name,
+        balloonContentHeader:'<span class="catcard__cat">'+p.tag+'</span><b style="display:block;font:700 15px/1.3 var(--serif);margin-top:3px">'+p.name+'</b>',
+        balloonContentBody:'<div style="font:400 13px/1.5 var(--sans);color:var(--body);margin:6px 0">'+p.addr+' · м. '+p.metro+'<br><span style="color:var(--muted)">'+p.hours+'</span></div>',
+        balloonContentFooter:'<button class="cat-popup-btn" data-place="'+p.id+'" type="button">Подробнее</button>',
+        placeData:p
+      },{
+        preset:'islands#circleIcon',
+        iconColor:'#2E7D5B',
+        iconStrokeColor:'#fff',
+        iconStrokeWidth:3
       });
-      var marker=L.marker([p.lat,p.lng],{icon:icon}).addTo(catMap);
-      marker.bindPopup('<div class="cat-popup"><span class="catcard__cat">'+p.tag+'</span><b>'+p.name+'</b><small>'+p.addr+' · м. '+p.metro+'</small><a class="btn btn--green btn--sm" href="#scr-article">Подробнее</a></div>');
-      catMarkers.push(marker);
+      pm.events.add('click',function(){catActivePlace=p;});
+      collection.add(pm);
+      catPlacemarks.push(pm);
     });
-    if(catMarkers.length){
-      var group=L.featureGroup(catMarkers);
-      catMap.fitBounds(group.getBounds().pad(0.15));
+    catMap.geoObjects.removeAll();
+    catMap.geoObjects.add(collection);
+    if(list.length){
+      catMap.setBounds(collection.getBounds(),{checkZoomRange:true,zoomMargin:30,duration:300}).then(function(){
+        if(catMap.getZoom()>15) catMap.setZoom(15);
+      });
     }
+  }
+
+  function openCatPopup(p){
+    var pm=catPlacemarks.find(function(m){return m.properties.get('placeData').id===p.id;});
+    if(pm) catMap.balloon.open(pm.geometry.getCoordinates(),pm.properties.getAll());
+  }
+
+  function openPlaceModal(p){
+    var m=document.getElementById('cat-modal');
+    if(!m) return;
+    m.querySelector('.cat-modal__body').innerHTML=
+      '<div class="cat-modal__ph"><span class="ph__bg im--'+p.ph+'"></span></div>'+
+      '<div style="padding:22px 26px 26px">'+
+        '<span class="catcard__cat">'+p.tag+'</span>'+
+        '<h2 style="font:700 26px/1.2 var(--serif);margin:6px 0 12px">'+p.name+'</h2>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font:400 14px/1.5 var(--sans);color:var(--body);margin-bottom:14px">'+
+          '<div><span style="color:var(--muted)">Адрес:</span> '+p.addr+'</div>'+
+          '<div><span style="color:var(--muted)">Метро:</span> '+p.metro+'</div>'+
+          '<div><span style="color:var(--muted)">Часы:</span> '+p.hours+'</div>'+
+          '<div><span style="color:var(--muted)">Рейтинг:</span> <b>'+p.rate+'</b> · '+p.rev+' отзывов</div>'+
+        '</div>'+
+        '<p style="font:400 15px/1.6 var(--sans);color:var(--body);margin:0 0 18px">'+p.desc+'</p>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap">'+
+          '<a class="btn btn--green btn--sm" href="#scr-article">Записаться / На сайт</a>'+
+          '<button class="btn btn--ghost btn--sm" type="button" data-close>Закрыть</button>'+
+        '</div>'+
+      '</div>';
+    mountIcons(m);
+    m.classList.add('is-open');
+    m.querySelector('[data-close]').addEventListener('click',function(){m.classList.remove('is-open');},{once:true});
   }
 
   function initCatMap(){
     var box=document.getElementById('cat-map'); if(!box || catMap) return;
-    if(!window.L){ setTimeout(initCatMap,200); return; }
-    catMap=L.map(box,{zoomControl:true,scrollWheelZoom:false}).setView([55.7558,37.6176],12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      maxZoom:19,
-      attribution:'© OpenStreetMap contributors'
-    }).addTo(catMap);
-    box.addEventListener('mouseenter',function(){catMap.scrollWheelZoom.enable();});
-    box.addEventListener('mouseleave',function(){catMap.scrollWheelZoom.disable();});
-    setTimeout(function(){catMap.invalidateSize(); renderCatalog();},100);
+    if(!window.ymaps){ setTimeout(initCatMap,200); return; }
+    ymaps.ready(function(){
+      catMap=new ymaps.Map(box,{
+        center:[55.7558,37.6176],
+        zoom:12,
+        controls:['zoomControl','fullscreenControl'],
+        behaviors:['drag','dblClickZoom','multiTouch']
+      });
+      catMap.container.fitToViewport();
+      renderCatalog();
+      // попап клик по balloon кнопке
+      $(document).on? null: null;
+      setTimeout(function(){
+        document.getElementById('cat-map').addEventListener('click',function(e){
+          var b=e.target.closest('[data-place]'); if(!b) return;
+          var p=PLACES.find(function(x){return x.id===+b.getAttribute('data-place');});
+          if(p) openPlaceModal(p);
+          catMap.balloon.close();
+        });
+      },500);
+    });
+    // скролл мышкой только при наведении
+    box.addEventListener('mouseenter',function(){if(catMap) catMap.behaviors.enable('scrollZoom');});
+    box.addEventListener('mouseleave',function(){if(catMap) catMap.behaviors.disable('scrollZoom');});
   }
+
 
   /* ---------- КОРОТКАЯ ЛЕНТА СОБЫТИЙ НА ГЛАВНОЙ ---------- */
   function renderShortFeed(){
@@ -2055,6 +2154,26 @@ var EVENTS=[
   renderCatalog();
   renderShortFeed();
   renderSoon();
+  // каталог: обработчики чипов/поиска/модалки
+  (function(){
+    var chips=document.getElementById('cat-filt');
+    if(chips) chips.addEventListener('click',function(e){
+      var b=e.target.closest('[data-cat]'); if(!b) return;
+      chips.querySelectorAll('.fchip').forEach(function(x){x.classList.remove('is-on');});
+      b.classList.add('is-on');
+      catFilt=b.getAttribute('data-cat');
+      renderCatalog();
+    });
+    var q=document.getElementById('cat-q');
+    if(q) q.addEventListener('input',function(){ catQuery=q.value; renderCatalog(); });
+    var m=document.getElementById('cat-modal');
+    if(m){
+      m.addEventListener('click',function(e){
+        if(e.target===m || e.target.closest('[data-close]')) m.classList.remove('is-open');
+      });
+      document.addEventListener('keydown',function(ev){if(ev.key==='Escape')m.classList.remove('is-open');});
+    }
+  })();
   showScreen('home');
 
   /* ---------------- ИНТЕРФЕЙС ---------------- */
@@ -2433,6 +2552,6 @@ var EVENTS=[
 })();
 </script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=d8e591ef-d4ae-4f6f-ab96-206096ceb52a&lang=ru_RU"></script>
 </body>
 </html>
