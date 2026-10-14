@@ -720,29 +720,41 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
 /* Каталог компаний */
 
-.catsearch{margin-bottom:10px;max-width:560px}
-.catsearch .search{display:flex;align-items:center;background:var(--tint);border:1px solid var(--line-2);border-radius:6px;padding:4px 4px 4px 10px}
-.catsearch input{flex:1;border:0;background:transparent;padding:8px 6px;font:400 14px/1.4 var(--sans);outline:none;min-width:0}
-.catfilt{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
-.catlayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
-.catlist{display:flex;flex-direction:column;gap:12px;max-height:640px;overflow-y:auto;padding-right:6px;min-width:0}
-.catcard{display:grid;grid-template-columns:92px 1fr auto;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);cursor:pointer;transition:.2s}
-.catcard:hover{border-color:var(--green-soft);background:#fff}
-.catcard.is-on{border-color:var(--green-d);box-shadow:0 0 0 2px var(--green-soft)}
-.catcard__ph{width:92px;height:92px;border-radius:var(--r-s);background:var(--tint);flex:0 0 auto;position:relative;overflow:hidden}
-.catcard__cat{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);background:var(--green-soft);padding:4px 7px;border-radius:2px;margin-bottom:6px}
-.catcard h3{font:700 17px/1.25 var(--serif);margin:2px 0 5px}
-.catcard__addr{font:400 13.5px/1.4 var(--sans);color:var(--muted);display:flex;gap:6px;align-items:flex-start}
-.catcard__addr .ic{flex:0 0 auto;margin-top:2px}
-.catcard__meta{display:flex;gap:10px;margin-top:6px;font-size:12.5px;color:var(--sec)}
-.catcard__meta b{color:var(--ink)}
-.catcard__right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.catcard__rate{font:700 14px/1 var(--serif);color:var(--ink);display:flex;align-items:center;gap:4px}
-.catcard__rate .ic{color:var(--gold)}
-.catcard__open{font:600 11.5px/1 var(--sans);padding:3px 7px;border-radius:2px;background:var(--green-soft);color:var(--green-d)}
-.catcard__open.closed{background:var(--clay-soft);color:var(--clay)}
-.catmap{display:flex;flex-direction:column;gap:8px;min-width:0}
-.catmap__box{width:100%;height:520px;border-radius:var(--r);border:1px solid var(--line-2);background:#E8ECE5}
+/* ===== Каталог в стиле ФОКУС ===== */
+.fk-search{display:flex;align-items:stretch;max-width:640px;margin:4px 0 22px;background:#fff;border:1px solid var(--line-2);border-radius:2px;overflow:hidden}
+.fk-search .ic--22{padding:0 12px;display:flex;align-items:center;justify-content:center}
+.fk-search__inp{flex:1;border:0;background:transparent;padding:11px 8px;font:400 15px/1 var(--sans);outline:none;min-width:0;color:var(--ink)}
+.fk-search__btn{background:var(--green-d);color:#fff;border:0;padding:0 22px;font:600 15px/1 var(--sans);cursor:pointer;transition:.15s}
+.fk-search__btn:hover{background:var(--ink)}
+.fk-filtrow{display:flex;align-items:flex-start;gap:14px;margin:6px 0 30px;flex-wrap:wrap}
+.fk-filtrow__lbl{font:400 14px/2.2 var(--sans);color:var(--muted);white-space:nowrap}
+.catfilt{display:flex;flex-wrap:wrap;gap:8px;flex:1}
+.catfilt .fchip{padding:9px 16px;font-size:14px}
+.catlayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:34px;align-items:start}
+.catlist{display:flex;flex-direction:column;gap:0;min-width:0}
+.catcard{display:grid;grid-template-columns:220px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--line);cursor:pointer;transition:.15s;background:transparent;border-radius:0;position:relative}
+.catcard:first-child{border-top:0;padding-top:0}
+.catcard:hover{background:transparent}
+.catcard:hover h3{color:var(--green)}
+.catcard.is-on{box-shadow:none}
+.catcard__ph{width:100%;aspect-ratio:4/3;border-radius:2px;background:var(--tint);position:relative;overflow:hidden;flex:0 0 auto}
+.catcard__body{position:relative;display:flex;flex-direction:column;min-width:0;padding:2px 0}
+.catcard__top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px}
+.catcard__cat{display:inline-block;font:500 12px/1 var(--sans);color:var(--green-d);background:var(--green-soft);padding:4px 8px;border-radius:2px}
+.catcard__rate{font:700 18px/1 var(--serif);color:var(--ink);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.catcard__rate .catstars{display:inline-flex;gap:1px;color:var(--gold);font-size:15px;letter-spacing:.03em;line-height:1}
+.catcard h3{font:700 22px/1.25 var(--serif);margin:0 0 10px;letter-spacing:-.008em;color:var(--ink)}
+.catcard__addr{font:400 14.5px/1.45 var(--sans);color:var(--body);display:flex;gap:6px;align-items:flex-start;margin-bottom:10px}
+.catcard__addr .ic{flex:0 0 auto;margin-top:3px;color:var(--green-d)}
+.catcard__meta{display:flex;gap:16px;margin-top:auto;font-size:13px;color:var(--muted);align-items:center;flex-wrap:wrap}
+.catcard__meta .meta-item{display:inline-flex;align-items:center;gap:5px}
+.catcard__meta .ic{color:var(--faint)}
+.catcard__open{font:600 12px/1 var(--sans);padding:3px 8px;border-radius:2px;background:var(--green-soft);color:var(--green-d)}
+.catcard__open.closed{background:var(--tint);color:var(--muted)}
+.catcard__btn{margin-top:12px;align-self:flex-start}
+.catcard__right{display:none}
+.catmap{display:flex;flex-direction:column;gap:10px;min-width:0;position:sticky;top:80px}
+.catmap__box{width:100%;height:560px;border-radius:2px;border:1px solid var(--line);background:#E8ECE5}
 .catmap__legend{display:flex;gap:18px;font:400 12px/1 var(--sans);color:var(--muted);padding:4px 2px}
 .catmap__legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
 .cat-popup b{font:700 14.5px/1.3 var(--serif);display:block;margin-bottom:3px}
@@ -751,13 +763,13 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 @media (max-width:1080px){
   .catlayout{grid-template-columns:minmax(0,1fr)}
   .catmap{position:static;order:-1}
-  .catmap__box{height:280px}
+  .catmap__box{height:340px}
   .catlist{max-height:none;overflow:visible;padding-right:0}
+  .catcard{grid-template-columns:180px 1fr;gap:18px}
 }
 @media (max-width:600px){
-  .catcard{grid-template-columns:68px 1fr;gap:10px}
-  .catcard__ph{width:68px;height:68px}
-  .catcard__right{grid-column:1 / span 2;flex-direction:row;align-items:center;justify-content:space-between}
+  .catcard{grid-template-columns:minmax(0,1fr);gap:12px}
+  .catcard__ph{width:100%;aspect-ratio:16/9}
 }
 
 /* Инверсия лого на тёмных блоках */
@@ -1438,21 +1450,25 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 
     </div>
 
-    <div class="catsearch"><div class="search"><span class="ic--20" data-ic="search" style="color:var(--faint);margin-left:2px"></span><input class="inp" id="cat-q" type="search" placeholder="Поиск по названию, адресу или метро" aria-label="Поиск по каталогу"></div></div>
-<div class="catfilt" id="cat-filt">
-      <button class="fchip is-on" data-cat="all">Все</button>
-      <button class="fchip" data-cat="yoga">Йога</button>
-      <button class="fchip" data-cat="pilates">Пилатес / растяжка</button>
-      <button class="fchip" data-cat="massage">Массаж</button>
-      <button class="fchip" data-cat="spa">SPA / сауны</button>
-      <button class="fchip" data-cat="fitness">Фитнес-клубы</button>
-      <button class="fchip" data-cat="swim">Плавание / бассейны</button>
-      <button class="fchip" data-cat="trainer">Тренеры</button>
-      <button class="fchip" data-cat="nutri">Нутрициологи</button>
-      <button class="fchip" data-cat="med">Медитация</button>
-      <button class="fchip" data-cat="clinic">Клиники интегративной медицины</button>
-      <button class="fchip" data-cat="food">Магазины здорового питания</button>
-      <button class="fchip" data-cat="cafe">ЗОЖ-кафе</button>
+    <div class="fk-search"><span class="ic--22" data-ic="search" style="color:var(--muted)"></span><input class="fk-search__inp" id="cat-q" type="search" placeholder="Поиск по местам, адресам и метро" aria-label="Поиск по каталогу"><button class="fk-search__btn" type="button">Найти</button></div>
+
+    <div class="fk-filtrow">
+      <span class="fk-filtrow__lbl">Категории:</span>
+      <div class="catfilt" id="cat-filt">
+        <button class="fchip is-on" data-cat="all">Все темы</button>
+        <button class="fchip" data-cat="yoga">Йога</button>
+        <button class="fchip" data-cat="pilates">Пилатес / растяжка</button>
+        <button class="fchip" data-cat="massage">Массаж</button>
+        <button class="fchip" data-cat="spa">SPA / сауны</button>
+        <button class="fchip" data-cat="fitness">Фитнес-клубы</button>
+        <button class="fchip" data-cat="swim">Плавание / бассейны</button>
+        <button class="fchip" data-cat="trainer">Тренеры</button>
+        <button class="fchip" data-cat="nutri">Нутрициологи</button>
+        <button class="fchip" data-cat="med">Медитация</button>
+        <button class="fchip" data-cat="clinic">Клиники интегративной медицины</button>
+        <button class="fchip" data-cat="food">Магазины ЗОЖ</button>
+        <button class="fchip" data-cat="cafe">ЗОЖ-кафе</button>
+      </div>
     </div>
 
     <div class="catlayout">
@@ -1842,20 +1858,23 @@ var EVENTS=[
     host.innerHTML=list.length ? list.map(function(p){
       var openCls=p.open?'':'closed';
       var openText=p.open?'Открыто сейчас':'Закрыто';
+      var full=Math.floor(p.rate), half=(p.rate-full)>=0.5?1:0, empty=5-full-half;
+      var stars='★'.repeat(full)+(half?'½':'')+'☆'.repeat(empty);
       return '<article class="catcard" data-id="'+p.id+'">'+
-        '<div class="catcard__ph"><span class="ph__bg im--'+p.ph+'" role="img" style="position:absolute;inset:0;background-size:cover;background-position:center;border-radius:var(--r-s)"></span></div>'+
-        '<div>'+
-          '<span class="catcard__cat">'+p.tag+'</span>'+
-          '<h3>'+p.name+'</h3>'+
-          '<div class="catcard__addr"><span class="ic--13" data-ic="pin"></span> '+p.addr+' · м. '+p.metro+'</div>'+
-          '<div class="catcard__meta">'+
-            '<span class="catcard__rate"><span class="ic--13" data-ic="starfill"></span> '+p.rate+'</span>'+
-            '<span>· '+p.rev+' отзывов</span>'+
+        '<div class="catcard__ph"><span class="ph__bg im--'+p.ph+'" role="img" style="position:absolute;inset:0;background-size:cover;background-position:center;border-radius:2px"></span></div>'+
+        '<div class="catcard__body">'+
+          '<div class="catcard__top">'+
+            '<span class="catcard__cat">'+p.tag+'</span>'+
+            '<span class="catcard__rate">'+p.rate+'<span class="catstars">'+stars+'</span></span>'+
           '</div>'+
-        '</div>'+
-        '<div class="catcard__right">'+
-          '<span class="catcard__open '+openCls+'">'+openText+'</span>'+
-          '<button class="btn btn--ghost btn--sm" type="button" data-place="'+p.id+'">Подробнее</button>'+
+          '<h3>'+p.name+'</h3>'+
+          '<div class="catcard__addr"><span class="ic--14" data-ic="pin"></span> '+p.addr+' · м. '+p.metro+'</div>'+
+          '<div class="catcard__meta">'+
+            '<span class="meta-item"><span class="ic--13" data-ic="clock"></span> '+p.hours+'</span>'+
+            '<span class="meta-item"><span class="ic--13" data-ic="comment"></span> '+p.rev+' отзывов</span>'+
+            '<span class="catcard__open '+openCls+'">'+openText+'</span>'+
+          '</div>'+
+          '<button class="btn btn--quiet btn--sm catcard__btn" type="button" data-place="'+p.id+'">Подробнее <span class="ic--14" data-ic="arrow-right"></span></button>'+
         '</div>'+
       '</article>';
     }).join('') : '<p class="lead" style="grid-column:1/-1;padding:40px 0">Ничего не найдено. Сбросьте фильтры или измените поисковый запрос.</p>';
