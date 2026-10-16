@@ -1025,8 +1025,12 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 }
 
 /* ---- Полезное: список + чипы ---- */
-#scr-article .art-split{display:none}
 #scr-article #art-filters{display:flex}
+#scr-article .art-single-wrap{display:none}
+#scr-article.is-list .art-single-wrap{display:none}
+#scr-article.is-list .art-list-wrap{display:block}
+#scr-article.is-single .art-list-wrap{display:none}
+#scr-article.is-single .art-single-wrap{display:block}
 </style>
 
 
@@ -1359,7 +1363,144 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
       <button class="fchip" data-at="mental">Ментальное здоровье</button>
       <button class="fchip" data-at="life">Образ жизни</button>
     </div>
-    <div class="split art-split">
+    <div class="art-list-wrap"><div class="g g2">
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--swim" role="img" aria-label="Красота и здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--lime">Красота и здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">5 антивозрастных практик: что действительно работает по мнению врачей</a></h3>
+          <p class="card__d">Разбираем антивозрастные протоколы integrative-медицины — от сна и питания до БАДов и ухода за кожей. Без обещаний вечной молодости.</p>
+          <div class="meta"><span>9 октября</span><span>·</span><span>24 120</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--medit" role="img" aria-label="Красота и здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--lime">Красота и здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">Чек-лист здоровья на осень: 8 анализов, которые стоит сдать</a></h3>
+          <p class="card__d">Витамин D, ферритин, ТТГ, В12 и другие — объясняем, зачем нужен каждый показатель и что означают отклонения от нормы.</p>
+          <div class="meta"><span>7 октября</span><span>·</span><span>18 460</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--salad" role="img" aria-label="Красота и здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--lime">Красота и здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">Уход за кожей осенью: 4 шага, которые советуют косметологи</a></h3>
+          <p class="card__d">Переход на плотные текстуры, сыворотки с витамином С и защита от ветра — сезонная смена рутины без лишних трат.</p>
+          <div class="meta"><span>5 октября</span><span>·</span><span>11 980</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--food" role="img" aria-label="Питание"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--gold">Питание</p>
+          <h3 class="card__t"><a href="#scr-article">7 продуктов осени, которые реально поддерживают иммунитет</a></h3>
+          <p class="card__d">Разбираемся с нутрициологом, что добавить в рацион без экзотики и лишних трат.</p>
+          <div class="meta"><span>4 октября</span><span>·</span><span>12 340</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--salad" role="img" aria-label="Питание"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--gold">Питание</p>
+          <h3 class="card__t"><a href="#scr-article">Сколько воды действительно нужно пить в день</a></h3>
+          <p class="card__d">Разбираем популярный миф про 2 литра в день и объясняем, как считать норму под свой вес и нагрузки.</p>
+          <div class="meta"><span>2 октября</span><span>·</span><span>14 280</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--food" role="img" aria-label="Питание"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--gold">Питание</p>
+          <h3 class="card__t"><a href="#scr-article">Как читать этикетки: 10 добавок, которых стоит избегать</a></h3>
+          <p class="card__d">Глутамат, трансжиры, скрытый сахар и Е-добавки — объясняем на примерах из обычного супермаркета.</p>
+          <div class="meta"><span>29 сентября</span><span>·</span><span>9 740</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--mara2" role="img" aria-label="Движение"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--clay">Движение</p>
+          <h3 class="card__t"><a href="#scr-article">Как начать бегать с нуля: план на 8 недель для офисных сотрудников</a></h3>
+          <p class="card__d">Три тренировки в неделю, разминка, обувь и типичные ошибки — полный гид для тех, кто начинает после долгого перерыва.</p>
+          <div class="meta"><span>6 октября</span><span>·</span><span>18 420</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--yoga-s" role="img" aria-label="Движение"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--clay">Движение</p>
+          <h3 class="card__t"><a href="#scr-article">Йога для спины от сидячей работы: 6 асан на 15 минут в день</a></h3>
+          <p class="card__d">Комплекс от преподавателя хатха-йоги для тех, кто проводит за экраном 8+ часов. Снимает зажимы в шее и пояснице.</p>
+          <div class="meta"><span>3 октября</span><span>·</span><span>13 580</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--bike" role="img" aria-label="Движение"></span></div>
+        <div class="card__body">
+          <p class="kicker-in kicker-in--clay">Движение</p>
+          <h3 class="card__t"><a href="#scr-article">Скандинавская ходьба vs бег: что выбрать для первого сезона</a></h3>
+          <p class="card__d">Сравниваем нагрузку на суставы, калории и эффект для сердечно-сосудистой системы — и подсказываем, с чего легче начать.</p>
+          <div class="meta"><span>1 октября</span><span>·</span><span>7 620</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--medit" role="img" aria-label="Ментальное здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Ментальное здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">Как перестать жить в режиме ожидания пятницы: 5 маленьких практик</a></h3>
+          <p class="card__d">Без эзотерики — простые приёмы из когнитивно-поведенческой терапии и осознанности, которые работают.</p>
+          <div class="meta"><span>9 октября</span><span>·</span><span>7 210</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--medit" role="img" aria-label="Ментальное здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Ментальное здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">Сон как восстановление: 5 правил гигиены сна</a></h3>
+          <p class="card__d">Сомнолог Елена Лаврова — о режиме, температуре в спальне и почему синий свет разрушает мелатонин.</p>
+          <div class="meta"><span>5 октября</span><span>·</span><span>9 640</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--yoga" role="img" aria-label="Ментальное здоровье"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Ментальное здоровье</p>
+          <h3 class="card__t"><a href="#scr-article">Тревога осенью: как распознать сезонную апатию и что с ней делать</a></h3>
+          <p class="card__d">Световой день короче, энергии меньше — объясняем, где норма, а где пора обратиться к специалисту.</p>
+          <div class="meta"><span>28 сентября</span><span>·</span><span>6 380</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--mara" role="img" aria-label="Образ жизни"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Образ жизни</p>
+          <h3 class="card__t"><a href="#scr-article">Как построить режим дня, если вы «сова»</a></h3>
+          <p class="card__d">Не нужно вставать в 5 утра — рассказываем, как составить комфортное расписание под поздний хронотип и всё успевать.</p>
+          <div class="meta"><span>8 октября</span><span>·</span><span>8 420</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--salad" role="img" aria-label="Образ жизни"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Образ жизни</p>
+          <h3 class="card__t"><a href="#scr-article">Экологичный быт: с чего начать без фанатизма</a></h3>
+          <p class="card__d">Сортировка мусора, многоразовые вещи, локальные продукты — 12 простых шагов, которые не превращают жизнь в подвиг.</p>
+          <div class="meta"><span>30 сентября</span><span>·</span><span>5 910</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><span class="ph__bg im--bike" role="img" aria-label="Образ жизни"></span></div>
+        <div class="card__body">
+          <p class="kicker-in ">Образ жизни</p>
+          <h3 class="card__t"><a href="#scr-article">Как выбрать коврик для йоги дома: гайд на 2026 год</a></h3>
+          <p class="card__d">Толщина, материал, сцепление и цена — сравниваем 6 моделей от бюджетных до премиальных.</p>
+          <div class="meta"><span>26 сентября</span><span>·</span><span>4 270</span></div>
+        </div>
+      </article>
+    </div></div>
+    <div class="art-single-wrap"><div class="split">
       <article class="art" style="display:none" id="art-single">
         <div class="bcrumbs"><a href="#scr-home">Главная</a><span>/</span><a href="#scr-article" data-artlist>Полезное</a><span>/</span><span id="art-bc">Питание</span></div>
         <div class="progress"><span>Чтение</span><div class="progress__bar" data-read-bar><i></i></div><span data-read-pct>0%</span><span data-read-left>осталось ~6 мин</span></div>
@@ -1452,9 +1593,9 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
       </aside>
     </div>
 
-    <div class="wrap sec">
+    <div class="wrap sec comments-block" style="display:none">
       <div class="sec__head">
-        <div><h2>Комментарии (12)</h2><p>Модерация перед публикацией. Без оскорблений и рекламы.</p></div>
+        <div><h2>Комментарии</h2><p>Модерация перед публикацией. Без оскорблений и рекламы.</p></div>
       </div>
       <form data-sub class="form" style="max-width:740px">
         <div class="field">
@@ -2515,6 +2656,7 @@ var EVENTS=[
     ['scr-news','scr-reviews','scr-article'].forEach(function(id){
       var sec=document.getElementById(id); if(!sec) return;
       if(sec.querySelector('.focus-layout')) return;
+      if(id==='scr-article') return; // у Полезного своя сетка с чипами
       var grids=sec.querySelectorAll('.g.g2, .g, .med, .fyou');
       var head=sec.querySelector('.sec__head');
       var filters=sec.querySelector('.filters');
@@ -2662,24 +2804,28 @@ var EVENTS=[
   (function(){
     var sec=document.getElementById('scr-article'); if(!sec) return;
     var chips=document.getElementById('art-filters');
-    var split=sec.querySelector('.art-split') || sec.querySelector('.split');
+    var split=sec.querySelector('.art-single-wrap') || sec.querySelector('.art-split') || sec.querySelector('.split');
     var single=document.getElementById('art-single') || split.querySelector('.art');
     // Список карточек — найдём первый .g внутри секции (после upgradeFocusScreens это .article-list)
-    var list=sec.querySelector('.article-list') || sec.querySelector('.g');
+    var list=sec.querySelector('.art-list-wrap .g') || sec.querySelector('.article-list') || sec.querySelector('.g');
     if(single && !single.id){single.id='art-single';}
 
     function showList(){
+      sec.classList.remove('is-single');sec.classList.add('is-list');
       if(split) split.style.display='none';
       if(single) single.style.display='none';
       if(list) list.style.display='';
       if(chips) chips.style.display='';
+      sec.querySelectorAll('.comments-block').forEach(function(b){b.style.display='none'});
       window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
     }
     function showSingle(){
+      sec.classList.remove('is-list');sec.classList.add('is-single');
       if(split) split.style.display='';
       if(single) single.style.display='';
       if(list) list.style.display='none';
       if(chips) chips.style.display='';
+      sec.querySelectorAll('.comments-block').forEach(function(b){b.style.display=''});
     }
     // Изначально показываем список (как на скриншоте ФОКУСа)
     showList();
