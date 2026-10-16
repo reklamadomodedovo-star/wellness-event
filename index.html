@@ -2254,16 +2254,18 @@ var EVENTS=[
     var utilHtml=''
       +'<div class="util"><div class="wrap"><div class="util__in">'
       +'<span><b>Среда, 14 октября 2026</b></span>'
-      +'<span class="util__hide js-upd">Обновлено 10:40</span>'
-      +'<span class="util__w util__hide"><span class="ic--13" data-ic="pin"></span> <b>+14°C</b> <span class="util__hide">· облачно · ветер 3 м/с</span></span>'
-      +'<span class="util__w util__hide"><span class="ic--13" data-ic="rub"></span> USD <b>97,4</b> ₽ · EUR <b>106,2</b> ₽</span>'
-      +'<span class="util__r">'
-        +'<a href="#scr-home"><span class="ic--13" data-ic="rss"></span> RSS</a>'
-        +'<span class="util__sep"></span>'
-        +'<a href="#scr-home"><span class="ic--13" data-ic="mail"></span> Рассылка</a>'
-        +'<span class="util__sep"></span>'
-        +'<a href="#scr-home" class="util__hide">Вход для редакции</a>'
-      +'</span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span>10:10</span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span><span class="ic--13" data-ic="pin" style="margin-right:4px"></span><b>+14°C</b></span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span><span class="ic--13" data-ic="sun" style="margin-right:4px"></span>УФ <b>2</b></span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span>облачно</span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span>ветер <b>3 м/с</b></span>'
+      +'<span class="util__sep" style="background:rgba(255,255,255,.28)"></span>'
+      +'<span><span class="ic--13" data-ic="sunrise" style="margin-right:4px"></span>восход <b>07:02</b> / закат <b>18:14</b></span>'
     +'</div></div></div>';
     var gh=document.getElementById('global-hd');
     gh.innerHTML=utilHtml;
@@ -2892,4 +2894,5 @@ var EVENTS=[
 
 <script src="https://api-maps.yandex.ru/2.1/?apikey=d8e591ef-d4ae-4f6f-ab96-206096ceb52a&lang=ru_RU"></script>
 </body>
-</html>
+</html><symbol id="i-sunrise" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 18h18M5 18a7 7 0 0 1 14 0M12 3v6m-4 3l4-4 4 4M8 14a4 4 0 0 1 8 0"/></symbol>
+
