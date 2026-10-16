@@ -1340,9 +1340,24 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 <!-- ============ ЭКРАН 2. ПОЛЕЗНОЕ / СТАТЬЯ ============ -->
 <section class="screen" id="scr-article">
   <div class="wrap sec sec--first">
-    <div class="split">
-      <article class="art">
-        <div class="bcrumbs"><a href="#scr-home">Главная</a><span>/</span><a href="#scr-article">Полезное</a><span>/</span><span>Питание</span></div>
+    <div class="sec__head">
+      <div>
+        <p class="kicker" style="color:var(--clay)">Полезное</p>
+        <h1 style="font-size:38px">Гид по здоровому образу жизни</h1>
+        <p style="margin-top:10px;font-size:17px;max-width:780px">Материалы о питании, движении, ментальном здоровье и образе жизни — от практикующих специалистов wellness-индустрии.</p>
+      </div>
+    </div>
+    <div class="filters" id="art-filters">
+      <button class="fchip is-on" data-at="all">Все темы</button>
+      <button class="fchip" data-at="beauty">Красота и здоровье</button>
+      <button class="fchip" data-at="food">Питание</button>
+      <button class="fchip" data-at="move">Движение</button>
+      <button class="fchip" data-at="mental">Ментальное здоровье</button>
+      <button class="fchip" data-at="life">Образ жизни</button>
+    </div>
+    <div class="split art-split">
+      <article class="art" style="display:none" id="art-single">
+        <div class="bcrumbs"><a href="#scr-home">Главная</a><span>/</span><a href="#scr-article" data-artlist>Полезное</a><span>/</span><span id="art-bc">Питание</span></div>
         <div class="progress"><span>Чтение</span><div class="progress__bar" data-read-bar><i></i></div><span data-read-pct>0%</span><span data-read-left>осталось ~6 мин</span></div>
         <h1>Питание осенью: 7 продуктов, которые действительно поддерживают иммунитет</h1>
         <p class="lead">Разбираемся, что добавить в рацион в сезон холодов — без рекламы и с опорой на рекомендации нутрициологов.</p>
@@ -2638,7 +2653,66 @@ var EVENTS=[
       document.addEventListener('keydown',function(ev){if(ev.key==='Escape')m.classList.remove('is-open');});
     }
   })();
-  showScreen('home');
+
+  /* ---- Фильтры Полезного + переключение список/статья ---- */
+  (function(){
+    var sec=document.getElementById('scr-article'); if(!sec) return;
+    var chips=document.getElementById('art-filters');
+    var split=sec.querySelector('.art-split') || sec.querySelector('.split');
+    var single=document.getElementById('art-single') || split.querySelector('.art');
+    // Список карточек — найдём первый .g внутри секции (после upgradeFocusScreens это .article-list)
+    var list=sec.querySelector('.article-list') || sec.querySelector('.g');
+    if(single && !single.id){single.id='art-single';}
+
+    function showList(){
+      if(split) split.style.display='none';
+      if(single) single.style.display='none';
+      if(list) list.style.display='';
+      if(chips) chips.style.display='';
+      window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
+    }
+    function showSingle(){
+      if(split) split.style.display='';
+      if(single) single.style.display='';
+      if(list) list.style.display='none';
+      if(chips) chips.style.display='';
+    }
+    // Изначально показываем список (как на скриншоте ФОКУСа)
+    showList();
+
+    if(chips) chips.addEventListener('click',function(e){
+      var b=e.target.closest('[data-at]'); if(!b) return;
+      chips.querySelectorAll('.fchip').forEach(function(x){x.classList.remove('is-on');});
+      b.classList.add('is-on');
+      var t=b.getAttribute('data-at');
+      // Фильтруем карточки по категории кикера
+      if(list) list.querySelectorAll('.artcard,.card').forEach(function(c){
+        if(t==='all'){c.style.display='';return;}
+        var k=c.querySelector('.artcard__cat,.kicker-in');
+        var txt=k?k.textContent.trim():'';
+        var map={'beauty':'Красота и здоровье','food':'Питание','move':'Движение','mental':'Ментальное здоровье','life':'Образ жизни'};
+        c.style.display=(txt===map[t])?'':'none';
+      });
+    });
+
+    // Клик по «Полезное» в хлебных крошках — к списку
+    document.addEventListener('click',function(e){
+      var a=e.target.closest('a[data-artlist]');
+      if(a && sec.contains(a)){e.preventDefault();showList();}
+    });
+
+    // Клик по карточке списка открывает inline-статью (упрощённо — показываем single)
+    if(list) list.addEventListener('click',function(e){
+      var a=e.target.closest('a[href="#scr-article"]');
+      if(!a || !list.contains(a)) return;
+      var card=a.closest('.artcard,.card'); if(!card) return;
+      e.preventDefault();
+      showSingle();
+      window.scrollTo({top:sec.offsetTop-80,behavior:'smooth'});
+    });
+  })();
+
+    showScreen('home');
 
   /* ---------------- ИНТЕРФЕЙС ---------------- */
   // переключение экранов — через глобальный делегат на data-scr
