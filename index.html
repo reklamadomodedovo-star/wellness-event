@@ -2379,7 +2379,7 @@ var EVENTS=[
     }).join('');
     var tags=['йога','бег','питание','медитация','фитнес','массаж','спа','сон','нутрициология','стресс','зож','витамины'];
     var tagcloud=tags.map(function(t){return '<a href="#scr-catalog">'+t+'</a>';}).join('');
-    return '<div class="sidebox"><h3>Рубрикатор</h3><ul class="rubricator">'+rubric+'</ul></div>'
+    return '<div class="sidebox"><h3>Самое читаемое</h3><ol class="topnum">'+tophtml+'</ol></div>'
       +'<div class="sidebox"><h3>Теги</h3><div class="tagcloud">'+tagcloud+'</div></div>'
       +'<div class="adbox"><span class="adbox__cap">Реклама</span><span class="adbox__body">Брендированный блок wellness-партнёра</span></div>'
       +'<div class="sub-block"><h3>Wellness Weekly</h3><p>Письмо по четвергам: главные события недели, новые места и скидки.</p>'
