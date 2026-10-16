@@ -211,35 +211,41 @@ h3{margin:0;font:700 21px/1.28 var(--serif)}
 .btn--sm{min-height:40px;height:40px;padding:0 16px 1px;font-size:14.5px}
 .btn--wide{width:100%}
 .btn--icon{min-height:40px;padding:0 11px}
-/* ---- Финальная центровка кнопок в модалках (жёстко) ---- */
-.cat-modal__box .btn,
-.signup-body .btn{
-  display:grid!important;
-  grid-auto-flow:column;
-  align-items:center!important;
-  justify-items:center!important;
-  justify-content:center!important;
-  align-content:center!important;
-  gap:8px;
-  height:44px!important;
-  min-height:44px!important;
-  padding:0 22px!important;
-  line-height:1!important;
-  font-size:15px!important;
-  font-weight:600;
-  vertical-align:middle;
-  box-sizing:border-box!important;
+/* ---- ПУЛЕНЕПРОБИВАЕМЫЕ КНОПКИ БЕЗ ИКОНОК ---- */
+.mbtn{
+  display:inline-block;
+  box-sizing:border-box;
+  height:44px;
+  line-height:42px;          /* 44 - 2px рамки = 42 → текст ровно по центру вертикали */
+  padding:0 28px;
   border-radius:6px;
+  font:600 15px/42px var(--sans);
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  vertical-align:top;
+  border:1px solid transparent;
+  transition:background .15s,border-color .15s,color .15s;
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
 }
-.cat-modal__box .btn .ic,
-.signup-body .btn .ic{display:block!important;width:16px;height:16px;margin:0!important;flex:none}
-.cat-modal__box .btn>*{margin:0!important;padding:0!important;align-self:center!important;justify-self:center!important}
-.cat-modal__box .btn > :not(.ic){transform:translateY(1px)}
-/* Контейнер кнопок — выравнивание по центру, чтобы не было скачка baseline */
-.cat-modal__body div[style*="display:flex"],
-.signup-body div[style*="display:flex"]{align-items:center!important}
+.mbtn--green{background:var(--green-d);color:#fff}
+.mbtn--green:hover{background:var(--ink);color:#fff}
+.mbtn--ghost{background:transparent;border-color:var(--line-2);color:var(--ink)}
+.mbtn--ghost:hover{border-color:var(--green-d);color:var(--green-d);background:transparent}
+.cat-modal__body,
+.signup-body{font-feature-settings:"kern" 1}
+/* Контейнер для кнопок в модалке выровнять по центру по вертикали */
+.cat-modal__body > div:last-child,
+.signup-body .signup-form > div:last-child{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+/* Прочие кнопки внутри signup-form тоже привести к mbtn-стилю, если они btn */
+.signup-body .btn{
+  display:inline-block!important;
+  height:44px;line-height:42px;padding:0 28px;
+  font:600 15px/42px var(--sans)!important;
+  text-align:center;box-sizing:border-box;border-radius:6px;
+  vertical-align:top;
+}
+.signup-body .btn .ic{display:none!important}
 .btn--sm{text-align:center;justify-content:center;line-height:1}
 .btn--sm .ic{flex:0 0 auto}
 
@@ -1972,8 +1978,8 @@ var EVENTS=[
         '</div>'+
         '<div class="row">'+
           '<button class="btn btn--quiet btn--sm" type="button" data-exp="'+i+'"><span class="when-closed">Подробнее</span><span class="when-open" style="display:none">Свернуть</span> <span class="ic--16" data-ic="chevron-right"></span></button>'+
-          '<button class="btn btn--sm btn--green" type="button" data-signup="'+i+'"><span class="ic--16" data-ic="edit"></span>Записаться</button>'+
-          '<a class="btn btn--sm btn--ghost-line" href="#scr-article" rel="noopener" style="text-decoration:none"><span class="ic--16" data-ic="external"></span>На сайт</a>'+
+          '<button class="mbtn mbtn--green" type="button" data-signup="'+i+'">Записаться</button>'+
+          '<a class="mbtn mbtn--ghost" href="#scr-article" rel="noopener">На сайт</a>'+
           '<button class="btn btn--ghost btn--sm" type="button" data-remind="'+i+'"><span class="ic--16" data-ic="bell"></span><span class="rem-txt">Напомнить</span></button>'+
           '<button class="btn btn--ghost btn--sm" type="button" data-ics="'+i+'"><span class="ic--16" data-ic="download"></span>В календарь</button>'+
           '<button class="btn btn--ghost btn--icon" type="button" data-share="'+i+'" aria-label="Поделиться"><span class="ic--16" data-ic="share"></span></button>'+
@@ -2234,9 +2240,9 @@ var EVENTS=[
         '</div>'+
         '<p style="font:400 15px/1.6 var(--sans);color:var(--body);margin:0 0 18px">'+p.desc+'</p>'+
         '<div style="display:flex;gap:10px;flex-wrap:wrap">'+
-          '<button class="btn btn--green btn--sm" type="button" data-cat-signup="'+p.id+'"><span class="ic--16" data-ic="edit"></span>Записаться</button>'+
-          '<a class="btn btn--ghost-line btn--sm" href="#scr-article" rel="noopener" style="text-decoration:none"><span class="ic--16" data-ic="external"></span>На сайт</a>'+
-          '<button class="btn btn--ghost btn--sm" type="button" data-close>Закрыть</button>'+
+          '<button class="mbtn mbtn--green" type="button" data-cat-signup="'+p.id+'">Записаться</button>'+
+          '<a class="mbtn mbtn--ghost" href="#scr-article" rel="noopener">На сайт</a>'+
+          '<button class="mbtn mbtn--ghost" type="button" data-close>Закрыть</button>'+
         '</div>'+
       '</div>';
     mountIcons(m);
@@ -2672,8 +2678,8 @@ var EVENTS=[
           '<div class="fg"><label>Комментарий</label><textarea name="note" placeholder="Количество гостей, вопросы организаторам…"></textarea></div>'+
           '<label class="signup-chk"><input type="checkbox" name="agree" required checked><span>Согласен с обработкой персональных данных и правилами участия.</span></label>'+
           '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'+
-            '<button class="btn btn--green" type="submit"><span class="ic--16" data-ic="check"></span>Подтвердить запись</button>'+
-            '<button class="btn btn--ghost" type="button" data-sclose>Отмена</button>'+
+            '<button class="btn btn--green" type="submit">Подтвердить запись</button>'+
+            '<button class="mbtn mbtn--ghost" type="button" data-sclose>Отмена</button>'+
           '</div>'+
         '</form>';
       mountIcons(body);
@@ -2698,7 +2704,7 @@ var EVENTS=[
             '<div class="ic-ok"><span class="ic--24" data-ic="check"></span></div>'+
             '<h3>Заявка отправлена!</h3>'+
             '<p>Мы подтвердили вашу запись на «'+ev.t+'». На почту придёт подтверждение с деталями и QR-кодом для прохода.</p>'+
-            '<button class="btn btn--green" type="button" data-sclose>Отлично</button>'+
+            '<button class="mbtn mbtn--green" type="button" data-sclose>Отлично</button>'+
           '</div>';
         mountIcons(body);
       });
@@ -2731,8 +2737,8 @@ var EVENTS=[
             '<div class="fg"><label>Комментарий</label><textarea name="note" placeholder="Желаемая дата и время, вопросы…"></textarea></div>'+
             '<label class="signup-chk"><input type="checkbox" name="agree" required checked><span>Согласен с обработкой персональных данных.</span></label>'+
             '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'+
-              '<button class="btn btn--green" type="submit"><span class="ic--16" data-ic="check"></span>Отправить заявку</button>'+
-              '<button class="btn btn--ghost" type="button" data-sclose>Отмена</button>'+
+              '<button class="btn btn--green" type="submit">Отправить заявку</button>'+
+              '<button class="mbtn mbtn--ghost" type="button" data-sclose>Отмена</button>'+
             '</div>'+
           '</form>';
         mountIcons(body);
@@ -2759,7 +2765,7 @@ var EVENTS=[
               '<div class="ic-ok"><span class="ic--24" data-ic="check"></span></div>'+
               '<h3>Заявка отправлена!</h3>'+
               '<p>Мы передали ваш запрос «'+pl.name+'». В ближайшее время с вами свяжутся для подтверждения записи.</p>'+
-              '<button class="btn btn--green" type="button" data-sclose>Отлично</button>'+
+              '<button class="mbtn mbtn--green" type="button" data-sclose>Отлично</button>'+
             '</div>';
           mountIcons(body);
         });
